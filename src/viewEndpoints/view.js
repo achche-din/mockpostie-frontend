@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import EndPoint from "../components/EndPoint";
 import Pagination from "../components/Pagination";
 import CustomLoader from "../components/CustomLoader";
