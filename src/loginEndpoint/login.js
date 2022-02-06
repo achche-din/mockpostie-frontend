@@ -1,69 +1,38 @@
-import React from "react";
-import {
-  GoogleAuthProvider,
-  signInWithRedirect,
-  getRedirectResult,
-} from "firebase/auth";
-import { authentication } from "./FirebaseConfig";
-
+import React, {useEffect} from "react";
+import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Card from 'react-bootstrap/Card';
+import { Container } from "react-bootstrap";
 
 const Login = () => {
+  const { currentUser, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
-  console.log("in login");
+  useEffect(() => {
+    if (currentUser) {
+      return navigate("/");
+    }
+  }, [currentUser, navigate])
   const signIn = () => {
-    console.log("InSign");
-    const provider = new GoogleAuthProvider();
-    signInWithRedirect(authentication, provider);
-    getRedirectResult(authentication)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access Google APIs.
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
-        // The signed-in user info.
-        const user = result.user;
-        console.log("result", result);
-        console.log("user", user);
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        console.log("error", error);
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        // The email of the user's account used.
-        // const email = error.email;
-        // The AuthCredential type that was used.
-        // const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
-    navigate("/");
+    loginWithGoogle();
+    return navigate("/");
   };
 
   return (
-    <div style={ContainerStyle}>
-      <button style={ButtonStyle} onClick={signIn}>
-        Sign in
-      </button>
-    </div>
+    <Container style={{'marginTop': '50px', 'width': '400px'}}>
+      <Card className="text-center">
+        <Card.Header>Login</Card.Header>
+        <Card.Body>
+          <Button  variant="outline-dark" className="googleButtonStyle" onClick={signIn}>
+            <img width="20px" style={{"marginBottom":"3px", "marginRight":"5px"}} alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+            Login with Google
+          </Button>
+        </Card.Body>
+      </Card>
+  </Container>
   );
 };
 
-const ContainerStyle = {
-  width: "100%",
-  height: "100%",
-  position: "absolute",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  backgroundColor: "#282A36",
-};
 
-const ButtonStyle = {
-  width: 200,
-  height: 40,
-  cursor: "pointer",
-  border: 0,
-  borderRadius: 10,
-};
 
 export default Login;

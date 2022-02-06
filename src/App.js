@@ -1,14 +1,27 @@
 import './App.css';
-import CustomNavbar from './components/CustomNavbar';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 import React from 'react';
-import View from "./viewEndpoints/view";
+import Create from './createEndpoint/create'
+import View from './viewEndpoints/view';
+import Login from './loginEndpoint/login';
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
   return (
-    <div className="App">
-      <CustomNavbar />
-      <View />
-    </div>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" exact element={<View/>}/>
+          <Route path="/create" exact element={<Create/>}/>
+          <Route path="/view" exact element={<View/>}/>
+          <Route path="/login" exact element={<Login/>}/>
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

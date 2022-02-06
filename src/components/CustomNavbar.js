@@ -1,29 +1,29 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
-import React, {useState} from 'react';
-import { authentication } from '../loginEndpoint/FirebaseConfig';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
-
-// import NavDropdown from 'react-bootstrap/NavDropdown';
-
-function signout(){
-  console.log("in logout");
-  authentication.signOut();
-}
 
 function CustomNavbar() {
-    const [isSignedIn,setIsSignedIn] = useState(false);
-    authentication.onAuthStateChanged((user)=>{
-      if(user){
+    const { currentUser, signOut } = useAuth();
+    const [isSignedIn, setIsSignedIn] = useState(false);
+    const navigate = useNavigate();
+    useEffect(() => {
+      if(currentUser){
         setIsSignedIn(true);
       }
       else{
         setIsSignedIn(false);
-      }
-    })
+      } 
+    }, [currentUser]);
 
-    console.log("isSignedIn:" + isSignedIn);
+    const logOut = () => {
+      signOut();
+      return navigate("login");
+    }
+
   return (
     <Navbar
       collapseOnSelect
@@ -42,7 +42,7 @@ function CustomNavbar() {
             {
               isSignedIn
               ?
-              <Nav.Link onClick={signout}>Logout</Nav.Link>
+              <Nav.Link onClick={logOut}>Logout</Nav.Link>
               :
               <Nav.Link href="/login">Login/SignUp</Nav.Link>
             }

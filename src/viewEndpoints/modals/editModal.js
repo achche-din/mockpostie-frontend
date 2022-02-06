@@ -5,8 +5,10 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import CustomLoader from "../../components/CustomLoader";
 import "./Modal.css";
+import { useAuth } from "../../contexts/AuthContext";
 
 function EditEndPointModal({ data, setEdit }) {
+  const { currentUser } = useAuth();
   const [show, setShow] = useState(true);
   const [loading, setLoading] = useState(false);
 
@@ -26,13 +28,13 @@ function EditEndPointModal({ data, setEdit }) {
         { response, customUrl },
         {
           headers: {
-            Authorization: "AUTHORIZATION_KEY",
+            Authorization: `Bearer ${currentUser.token}`,
             "Content-Type": "application/json",
           },
         }
       )
       .then((res) => console.log(res))
-      .catch((error) => console.err(error));
+      .catch((error) => console.error(error));
     setLoading(false);
     handleClose();
   };

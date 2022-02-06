@@ -4,9 +4,11 @@ import React, { useState } from "react";
 import "./Modal.css";
 import CustomLoader from "../../components/CustomLoader";
 import axios from "axios";
+import { useAuth } from "../../contexts/AuthContext";
 
 function DeleteEndPointModal({ data, setTrash }) {
   const [show, setShow] = useState(true);
+  const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
 
   const handleClose = () => {
@@ -22,12 +24,12 @@ function DeleteEndPointModal({ data, setTrash }) {
       {customUrl},
       {
         headers: {
-          Authorization: "AUTHORIZATION_KEY",
+          Authorization: `Bearer ${currentUser.token}`,
           "Content-Type": "application/json",
         },
       })
       .then((res) => console.log(res))
-      .catch((error) => console.err(error));
+      .catch((error) => console.error(error));
     setLoading(false);
     handleClose();
   };
