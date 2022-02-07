@@ -24,7 +24,7 @@ function EditEndPointModal({ data, setEdit }) {
     setLoading(true);
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/api/editLink`,
+        `${process.env.REACT_APP_API_URL}/api/editLink/`,
         { response, customUrl },
         {
           headers: {

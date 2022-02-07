@@ -20,7 +20,7 @@ function DeleteEndPointModal({ data, setTrash }) {
     const customUrl = data["customUrl"];
     setLoading(true);
     axios
-      .post(`${process.env.REACT_APP_API_URL}/api/deleteLink`,
+      .post(`${process.env.REACT_APP_API_URL}/api/deleteLink/`,
       {customUrl},
       {
         headers: {

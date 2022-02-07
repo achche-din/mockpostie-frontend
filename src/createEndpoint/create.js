@@ -13,11 +13,13 @@ const Create = () => {
   const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!currentUser) {
       return navigate("/login");
     }
   }, [currentUser, navigate]);
+  
   const createMockAPI = (event) => {
     const customUrl = event.target.elements.urlEndpoint.value;
     const response = event.target.elements.response.value;
