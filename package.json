@@ -1,6 +1,8 @@
 {
   "name": "frontend",
+  "homepage": ".",
   "version": "0.1.0",
+  "proxy": "https://mockpostie.herokuapp.com",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^5.15.4",
@@ -48,7 +50,7 @@
     ]
   },
   "engines": {
-    "node": "14.0.0",
-    "npm": "6.0.0"
+    "node": "14.18.3",
+    "npm": "8.1.2"
   }
 }
