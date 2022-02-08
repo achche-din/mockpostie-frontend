@@ -15,6 +15,7 @@ function View() {
   const [endPoints, setEndPoints] = useState([]);
   const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
+  const [viewUpdateFlag, setViewUpdateFlag] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,7 +41,7 @@ function View() {
       .catch((error) => console.error(error));
     }
     fetchEndpoints();
-  }, [currentUser, navigate]);
+  }, [currentUser, navigate, viewUpdateFlag]);
   
   if (loading) {
     return <CustomLoader />;
@@ -58,9 +59,8 @@ function View() {
       <Container>
         <InputGroup size="sm" className="mb-1">
           <FormControl
-            aria-label="Small"
-            aria-describedby="inputGroup-sizing-sm"
-            placeholder="enter endpoint to search"
+            type = "text"
+            placeholder="Enter endpoint to search"
             onChange={(event) => {
               search(event.target.value);
             }}
@@ -72,6 +72,7 @@ function View() {
             <Pagination
               data={endPoints}
               RenderComponent={EndPoint}
+              setViewUpdateFlag={setViewUpdateFlag}
               title="EndPoints"
               pageLimit={4}
               dataLimit={8}

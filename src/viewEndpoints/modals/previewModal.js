@@ -34,7 +34,7 @@ function PreviewEndPointModal({data, setPreview}) {
           <textarea
             className="form-control"
             name="response"
-            rows="3"
+            rows="7"
             value={data.response}
             readOnly
           />

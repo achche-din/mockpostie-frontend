@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import "./Pagination.css";
 
-function Pagination({ data, RenderComponent, title, pageLimit, dataLimit }) {
+function Pagination({ data, RenderComponent, title, pageLimit, dataLimit, setViewUpdateFlag }) {
   const pages = Math.ceil(data.length / dataLimit);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -44,7 +44,7 @@ function Pagination({ data, RenderComponent, title, pageLimit, dataLimit }) {
           <ListGroup variant="flush">
             {getPaginatedData().map((d, idx) => (
               <ListGroup.Item key={idx}>
-                <RenderComponent key={idx} data={d} />
+                <RenderComponent key={idx} data={d} setViewUpdateFlag={setViewUpdateFlag} />
               </ListGroup.Item>
             ))}
           </ListGroup>

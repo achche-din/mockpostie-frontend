@@ -6,32 +6,36 @@ import CustomLoader from "../../components/CustomLoader";
 import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext";
 
-function DeleteEndPointModal({ data, setTrash }) {
+function DeleteEndPointModal({ data, setTrash, setViewUpdateFlag }) {
   const [show, setShow] = useState(true);
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
-
   const handleClose = () => {
     setShow(false);
     setTrash(false);
+    setLoading(false);
   };
 
   const deleteLink = () => {
-    const customUrl = data["customUrl"];
     setLoading(true);
     axios
       .post(`${process.env.REACT_APP_API_URL}/api/deleteLink/`,
-      {customUrl},
+      {customUrl: data.customUrl},
       {
         headers: {
           Authorization: `Bearer ${currentUser.token}`,
           "Content-Type": "application/json",
         },
       })
-      .then((res) => console.log(res))
-      .catch((error) => console.error(error));
-    setLoading(false);
-    handleClose();
+      .then((res) => {
+        console.log(res);
+        setViewUpdateFlag(prevState => !prevState);
+        handleClose();
+      })
+      .catch((error) => {
+        console.error(error);
+        handleClose();
+      });      
   };
 
   return (

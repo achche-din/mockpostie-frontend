@@ -13,12 +13,10 @@ import {
 import EditEndPointModal from "../viewEndpoints/modals/editModal";
 import DeleteEndPointModal from "../viewEndpoints/modals/deleteModal";
 import PreviewEndPointModal from "../viewEndpoints/modals/previewModal";
-
 import "./EndPoint.css";
 import Container from "react-bootstrap/esm/Container";
 
-const EndPoint = (props) => {
-  const data = props.data;
+const EndPoint = ({ data, setViewUpdateFlag}) => {
   const [preview, setPreview] = useState(false);
   const [edit, setEdit] = useState(false);
   const [trash, setTrash] = useState(false);
@@ -76,9 +74,9 @@ const EndPoint = (props) => {
           </Button>
         </Col>
       </Row>
-      {preview && <PreviewEndPointModal data={data} setPreview={setPreview} />}
-      {edit && <EditEndPointModal data={data} setEdit={setEdit} />}
-      {trash && <DeleteEndPointModal data={data} setTrash={setTrash} />}
+      {preview && <PreviewEndPointModal data={data} setPreview={setPreview}/>}
+      {edit && <EditEndPointModal data={data} setEdit={setEdit} setViewUpdateFlag={setViewUpdateFlag}/>}
+      {trash && <DeleteEndPointModal data={data} setTrash={setTrash}  setViewUpdateFlag={setViewUpdateFlag}/>}
     </Container>
   );
 };

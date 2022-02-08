@@ -7,7 +7,7 @@ import CustomLoader from "../../components/CustomLoader";
 import "./Modal.css";
 import { useAuth } from "../../contexts/AuthContext";
 
-function EditEndPointModal({ data, setEdit }) {
+function EditEndPointModal({ data, setEdit, setViewUpdateFlag }) {
   const { currentUser } = useAuth();
   const [show, setShow] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -15,6 +15,7 @@ function EditEndPointModal({ data, setEdit }) {
   const handleClose = () => {
     setShow(false);
     setEdit(false);
+    setLoading(false);
   };
 
   const editEndPoint = (event) => {
@@ -33,10 +34,15 @@ function EditEndPointModal({ data, setEdit }) {
           },
         }
       )
-      .then((res) => console.log(res))
-      .catch((error) => console.error(error));
-    setLoading(false);
-    handleClose();
+      .then((res) => {
+        console.log(res);
+        setViewUpdateFlag(prevState => !prevState);
+        handleClose();
+      })
+      .catch((error) => {
+        handleClose();
+        console.error(error);
+      });
   };
 
   return (
@@ -65,7 +71,7 @@ function EditEndPointModal({ data, setEdit }) {
               <textarea
                 className="form-control"
                 name="response"
-                rows="3"
+                rows="7"
                 defaultValue={data.response}
                 required
               />

@@ -45,16 +45,14 @@ const Create = () => {
         console.error(error);
         setLoading(false);
       });
+      navigate("/");
   };
-
-  if (loading) {
-    return <CustomLoader/>
-  }
 
   return (
     <div>
       <CustomNavbar />
       <Container>
+      {loading && <CustomLoader/>}
         <Form className="formStyles" onSubmit={createMockAPI}>
           <Form.Group controlId="UrlEndpoint" className="mb-3">
             <Form.Label className="h4">URL Endpoint</Form.Label>
@@ -71,7 +69,7 @@ const Create = () => {
             <textarea
               className="form-control"
               name="response"
-              rows="3"
+              rows="8"
               placeholder="paste your endpoint response here."
               required
             />
