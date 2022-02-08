@@ -45,7 +45,6 @@ const Create = () => {
         console.error(error);
         setLoading(false);
       });
-      navigate("/");
   };
 
   return (
