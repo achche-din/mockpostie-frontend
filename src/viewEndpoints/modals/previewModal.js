@@ -31,12 +31,9 @@ function PreviewEndPointModal({data, setPreview}) {
 
         <Form.Group controlId="UrlEndpointResponse" className="mb-3">
           <Form.Label className="h4">Response</Form.Label>
-          <textarea
-            className="form-control"
-            name="response"
-            rows="7"
-            value={data.response}
-            readOnly
+          <Form.Control as="textarea" rows={7} 
+            required name="response"
+            value={data.response} readOnly
           />
         </Form.Group>
       </Modal.Body>

@@ -35,8 +35,12 @@ function DeleteEndPointModal({ data, setTrash, setViewUpdateFlag }) {
       .catch((error) => {
         console.error(error);
         handleClose();
-      });      
+      });
   };
+
+  if (loading) {
+    return <CustomLoader/>
+  }
 
   return (
     <>

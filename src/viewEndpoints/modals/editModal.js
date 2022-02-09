@@ -36,20 +36,23 @@ function EditEndPointModal({ data, setEdit, setViewUpdateFlag }) {
       )
       .then((res) => {
         console.log(res);
-        setViewUpdateFlag(prevState => !prevState);
         handleClose();
+        setViewUpdateFlag(prevState => !prevState);
       })
       .catch((error) => {
-        handleClose();
         console.error(error);
+        handleClose();
       });
+      
   };
+
+  if (loading) {
+    return <CustomLoader/>
+  }
 
   return (
     <>
       <Modal show={show} onHide={handleClose} className="modalBackground">
-        {loading && <CustomLoader />}
-
         <Modal.Header closeButton>
           <Modal.Title>Edit</Modal.Title>
         </Modal.Header>
@@ -68,12 +71,9 @@ function EditEndPointModal({ data, setEdit, setViewUpdateFlag }) {
 
             <Form.Group controlId="UrlEndpointResponse" className="mb-3">
               <Form.Label className="h4">Response</Form.Label>
-              <textarea
-                className="form-control"
-                name="response"
-                rows="7"
+              <Form.Control as="textarea" rows={7} 
+                required name="response"
                 defaultValue={data.response}
-                required
               />
             </Form.Group>
             
