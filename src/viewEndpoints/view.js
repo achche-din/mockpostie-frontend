@@ -54,7 +54,7 @@ function View() {
     <div>
       <CustomNavbar />
       <Container>
-        <InputGroup size="sm" className="mb-1">
+        <InputGroup size="lg" className="mb-1">
           <FormControl
             type="text"
             placeholder="Enter endpoint to search"

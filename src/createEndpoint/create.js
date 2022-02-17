@@ -38,12 +38,14 @@ const Create = () => {
           },
         }
       )
+      .then((res) => {
+        setLoading(false);
+        navigate("/");
+      })
       .catch((error) => {
         console.error(error);
         setLoading(false);
       });
-    setLoading(false);
-    navigate("/");
   };
 
   if (loading) {

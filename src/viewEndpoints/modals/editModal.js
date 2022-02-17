@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/esm/Button";
 import Form from "react-bootstrap/Form";
@@ -37,17 +37,16 @@ function EditEndPointModal({ data, setEdit, setViewUpdateFlag }) {
       .then((res) => {
         console.log(res);
         handleClose();
-        setViewUpdateFlag(prevState => !prevState);
+        setViewUpdateFlag((prevState) => !prevState);
       })
       .catch((error) => {
         console.error(error);
         handleClose();
       });
-      
   };
 
   if (loading) {
-    return <CustomLoader/>
+    return <CustomLoader />;
   }
 
   return (
@@ -56,7 +55,7 @@ function EditEndPointModal({ data, setEdit, setViewUpdateFlag }) {
         <Modal.Header closeButton>
           <Modal.Title>Edit</Modal.Title>
         </Modal.Header>
-        
+
         <Modal.Body>
           <Form onSubmit={editEndPoint}>
             <Form.Group controlId="UrlEndpoint" className="mb-3">
@@ -66,17 +65,21 @@ function EditEndPointModal({ data, setEdit, setViewUpdateFlag }) {
                 name="urlEndpoint"
                 defaultValue={data.customUrl}
                 required
+                readOnly
               />
             </Form.Group>
 
             <Form.Group controlId="UrlEndpointResponse" className="mb-3">
               <Form.Label className="h4">Response</Form.Label>
-              <Form.Control as="textarea" rows={7} 
-                required name="response"
+              <Form.Control
+                as="textarea"
+                rows={7}
+                required
+                name="response"
                 defaultValue={data.response}
               />
             </Form.Group>
-            
+
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
                 Close
@@ -86,7 +89,7 @@ function EditEndPointModal({ data, setEdit, setViewUpdateFlag }) {
               </Button>
             </Modal.Footer>
           </Form>
-        </Modal.Body>    
+        </Modal.Body>
       </Modal>
     </>
   );
