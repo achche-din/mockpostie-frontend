@@ -10,12 +10,12 @@ const Login = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (currentUser) {
-      return navigate("/");
+      return navigate("/home");
     }
   }, [currentUser, navigate])
   const signIn = () => {
     loginWithGoogle();
-    return navigate("/");
+    return navigate("/home");
   };
 
   return (
