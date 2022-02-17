@@ -21,7 +21,7 @@ function View() {
   useEffect(() => {
     const fetchEndpoints = async () => {
       if (!currentUser) {
-        return navigate("/login");
+        return navigate("/");
       }
       setLoading(true);
       axios

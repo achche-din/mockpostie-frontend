@@ -16,7 +16,7 @@ const Create = () => {
 
   useEffect(() => {
     if (!currentUser) {
-      return navigate("/login");
+      return navigate("/");
     }
   }, [currentUser, navigate]);
 
@@ -40,7 +40,7 @@ const Create = () => {
       )
       .then((res) => {
         setLoading(false);
-        navigate("/");
+        navigate("/dashboard");
       })
       .catch((error) => {
         console.error(error);

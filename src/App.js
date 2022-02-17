@@ -2,9 +2,8 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React from "react";
 import Create from "./createEndpoint/create";
-import Home from './Home';
+import Home from "./Home";
 import View from "./viewEndpoints/view";
-import Login from "./loginEndpoint/login";
 import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
@@ -12,11 +11,9 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/" exact element={<View />} />
+          <Route path="/" exact element={<Home />} />
           <Route path="/create" exact element={<Create />} />
-          <Route path="/view" exact element={<View />} />
-          <Route path="/login" exact element={<Login />} />
-          <Route path="/home" exact element={<Home />} />
+          <Route path="/dashboard" exact element={<View />} />
         </Routes>
       </Router>
     </AuthProvider>
