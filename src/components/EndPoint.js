@@ -8,8 +8,8 @@ import {
   faTrash,
   faEye,
   faCopy,
+  faExternalLinkAlt,
 } from "@fortawesome/free-solid-svg-icons";
-
 import EditEndPointModal from "../viewEndpoints/modals/editModal";
 import DeleteEndPointModal from "../viewEndpoints/modals/deleteModal";
 import PreviewEndPointModal from "../viewEndpoints/modals/previewModal";
@@ -63,6 +63,14 @@ const EndPoint = ({ data, setViewUpdateFlag }) => {
             onClick={() => navigator.clipboard.writeText(customUrl)}
           >
             <FontAwesomeIcon icon={faCopy} name="copyToClipboard" />
+          </Button>
+          <Button size="sm" variant="outline-primary">
+            <a href={customUrl} target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon
+                icon={faExternalLinkAlt}
+                name="copyToClipboard"
+              />
+            </a>
           </Button>
         </Col>
       </Row>

@@ -19,12 +19,12 @@ const Create = () => {
       return navigate("/login");
     }
   }, [currentUser, navigate]);
-  
+
   const createMockAPI = (event) => {
     const customUrl = event.target.elements.urlEndpoint.value;
     const response = event.target.elements.response.value;
     setLoading(true);
-    
+
     axios
       .post(
         `${process.env.REACT_APP_API_URL}/api/create/`,
@@ -35,22 +35,19 @@ const Create = () => {
         {
           headers: {
             Authorization: `Bearer ${currentUser.token}`,
-          }
+          },
         }
       )
-      .then((res) => {
-        console.log('result',res);
-        setLoading(false);
-        navigate("/");
-      })
       .catch((error) => {
         console.error(error);
         setLoading(false);
-      })
+      });
+    setLoading(false);
+    navigate("/");
   };
 
   if (loading) {
-    return <CustomLoader/>
+    return <CustomLoader />;
   }
   return (
     <div>
@@ -69,8 +66,12 @@ const Create = () => {
 
           <Form.Group controlId="UrlEndpointResponse" className="mb-3">
             <Form.Label className="h4">Response</Form.Label>
-            <Form.Control as="textarea" rows={8} placeholder="paste your endpoint response here."
-              required name="response"
+            <Form.Control
+              as="textarea"
+              rows={8}
+              placeholder="paste your endpoint response here."
+              required
+              name="response"
             />
           </Form.Group>
 
