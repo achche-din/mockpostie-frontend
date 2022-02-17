@@ -24,25 +24,22 @@ function View() {
         return navigate("/login");
       }
       setLoading(true);
-      axios.get(
-        `${process.env.REACT_APP_API_URL}/api/`,
-        {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}/api/`, {
           headers: {
             Authorization: `Bearer ${currentUser.token}`,
-          }
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-        endPointsRef.current = res.data;
-        setEndPoints(res.data);
-        setLoading(false);
-      })
-      .catch((error) => console.error(error));
-    }
+          },
+        })
+        .then((res) => {
+          endPointsRef.current = res.data;
+          setEndPoints(res.data);
+          setLoading(false);
+        })
+        .catch((error) => console.error(error));
+    };
     fetchEndpoints();
   }, [currentUser, navigate, viewUpdateFlag]);
-  
+
   if (loading) {
     return <CustomLoader />;
   }
@@ -55,11 +52,11 @@ function View() {
 
   return (
     <div>
-      <CustomNavbar/>
+      <CustomNavbar />
       <Container>
         <InputGroup size="sm" className="mb-1">
           <FormControl
-            type = "text"
+            type="text"
             placeholder="Enter endpoint to search"
             onChange={(event) => {
               search(event.target.value);
