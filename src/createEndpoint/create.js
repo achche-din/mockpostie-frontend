@@ -8,6 +8,9 @@ import "./create.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import CustomLoader from "../components/CustomLoader";
+import {toast} from 'react-toastify';
+
+toast.configure();
 
 const Create = () => {
   const [loading, setLoading] = useState(false);
@@ -40,11 +43,13 @@ const Create = () => {
       )
       .then((res) => {
         setLoading(false);
+        toast.success("Created Your Endpoint");
         navigate("/dashboard");
       })
       .catch((error) => {
         console.error(error);
         setLoading(false);
+        toast.error('Internal Server Error');
       });
   };
 

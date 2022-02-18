@@ -6,6 +6,9 @@ import axios from "axios";
 import CustomLoader from "../../components/CustomLoader";
 import "./Modal.css";
 import { useAuth } from "../../contexts/AuthContext";
+import {toast} from 'react-toastify';
+
+toast.configure();
 
 function EditEndPointModal({ data, setEdit, setViewUpdateFlag }) {
   const { currentUser } = useAuth();
@@ -38,10 +41,12 @@ function EditEndPointModal({ data, setEdit, setViewUpdateFlag }) {
         console.log(res);
         handleClose();
         setViewUpdateFlag((prevState) => !prevState);
+        toast.success(`Edited Endpoint ${customUrl}`);
       })
       .catch((error) => {
         console.error(error);
         handleClose();
+        toast.error('Internal Server Error');
       });
   };
 

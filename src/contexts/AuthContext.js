@@ -22,7 +22,6 @@ export function AuthProvider({ children }) {
     getRedirectResult(auth)
       .then((result) => {
         const user = result.user;
-        console.log("result", result);
         console.log("user", user);
       })
       .catch((error) => {

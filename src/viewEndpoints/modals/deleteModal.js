@@ -5,6 +5,9 @@ import "./Modal.css";
 import CustomLoader from "../../components/CustomLoader";
 import axios from "axios";
 import { useAuth } from "../../contexts/AuthContext";
+import {toast} from 'react-toastify';
+
+toast.configure();
 
 function DeleteEndPointModal({ data, setTrash, setViewUpdateFlag }) {
   const [show, setShow] = useState(true);
@@ -31,10 +34,12 @@ function DeleteEndPointModal({ data, setTrash, setViewUpdateFlag }) {
         console.log(res);
         setViewUpdateFlag(prevState => !prevState);
         handleClose();
+        toast.success(`Deleted Endpoint ${data.customUrl}`);
       })
       .catch((error) => {
         console.error(error);
         handleClose();
+        toast.error('Internal Server Error');
       });
   };
 
