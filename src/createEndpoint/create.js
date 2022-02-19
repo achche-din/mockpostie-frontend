@@ -14,6 +14,7 @@ toast.configure();
 
 const Create = () => {
   const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState('');
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
@@ -22,6 +23,19 @@ const Create = () => {
       return navigate("/");
     }
   }, [currentUser, navigate]);
+
+  const prettyJSON = () => {
+    try {
+      const prettyResponse = JSON.stringify(JSON.parse(response), null, 2);
+      setResponse(prettyResponse);
+    } catch (error) {
+      toast.error('JSON Not Valid');
+    }
+  }
+
+  const handleResponseChange = (event) => {
+    setResponse(event.target.value);
+  }
 
   const createMockAPI = (event) => {
     const customUrl = event.target.elements.urlEndpoint.value;
@@ -72,23 +86,35 @@ const Create = () => {
           </Form.Group>
 
           <Form.Group controlId="UrlEndpointResponse" className="mb-3">
-            <Form.Label className="h4">Response</Form.Label>
+            <Form.Label className="h4">
+              Response 
+              <Button
+                variant="secondary"
+                className="m-3"
+                size="sm"
+                onClick={prettyJSON}
+              >
+                prettyJSON
+              </Button>
+            </Form.Label>
             <Form.Control
               as="textarea"
-              rows={8}
+              rows={6}
               placeholder="paste your endpoint response here."
               required
               name="response"
+              onChange={handleResponseChange}
+              value={response}
             />
           </Form.Group>
 
-          <Button
-            variant="success"
-            type="submit"
-            className="submitButtonStyles"
-          >
-            Submit
-          </Button>
+            <Button
+              variant="success"
+              className="buttonStyles"
+              type="submit"
+            >
+              Submit
+            </Button>
         </Form>
       </Container>
     </div>

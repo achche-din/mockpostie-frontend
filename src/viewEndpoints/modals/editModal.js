@@ -12,14 +12,28 @@ toast.configure();
 
 function EditEndPointModal({ data, setEdit, setViewUpdateFlag }) {
   const { currentUser } = useAuth();
+  const [response, setResponse] = useState(data.response);
   const [show, setShow] = useState(true);
   const [loading, setLoading] = useState(false);
-
+  
   const handleClose = () => {
     setShow(false);
     setEdit(false);
     setLoading(false);
   };
+
+  const handleResponseChange = (event) => {
+    setResponse(event.target.value);
+  }
+
+  const prettyJSON = () => {
+    try {
+      const prettyResponse = JSON.stringify(JSON.parse(response), null, 2);
+      setResponse(prettyResponse);
+    } catch (error) {
+      toast.error('JSON Not Valid');
+    }
+  }
 
   const editEndPoint = (event) => {
     event.preventDefault();
@@ -75,13 +89,24 @@ function EditEndPointModal({ data, setEdit, setViewUpdateFlag }) {
             </Form.Group>
 
             <Form.Group controlId="UrlEndpointResponse" className="mb-3">
-              <Form.Label className="h4">Response</Form.Label>
+            <Form.Label className="h4">
+              Response 
+              <Button
+                variant="secondary"
+                className="m-3"
+                size="sm"
+                onClick={prettyJSON}
+              >
+                prettyJSON
+              </Button>
+            </Form.Label>
               <Form.Control
                 as="textarea"
                 rows={7}
                 required
                 name="response"
-                defaultValue={data.response}
+                onChange={handleResponseChange}
+                value={response}
               />
             </Form.Group>
 
