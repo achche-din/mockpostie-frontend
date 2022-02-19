@@ -11,6 +11,12 @@ function PreviewEndPointModal({data, setPreview}) {
     setShow(false);
     setPreview(false);
   }
+  let prettyResponse = '';
+  try {
+    prettyResponse = JSON.stringify(JSON.parse(data.response), null, 2);
+  } catch (error) {
+    prettyResponse = data.response
+  }
   return (
     <Modal show={show} onHide={handleClose} className='modalBackground'>
 
@@ -33,7 +39,7 @@ function PreviewEndPointModal({data, setPreview}) {
           <Form.Label className="h4">Response</Form.Label>
           <Form.Control as="textarea" rows={7} 
             required name="response"
-            value={data.response} readOnly
+            value={prettyResponse} readOnly
           />
         </Form.Group>
       </Modal.Body>
