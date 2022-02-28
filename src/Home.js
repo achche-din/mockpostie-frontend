@@ -62,6 +62,20 @@ function Home() {
             />
           </div>
         </div>
+        <h3 style={{ textAlign: "center" }}>How to use MockPostie?</h3>
+        <div className="card" style={{ marginBottom: "40px" }}>
+            <div className="card-body">
+              <p className="card-text">
+              <ul class="list-group">
+                <li class="list-group-item"><a href="/create">Create</a> your endPoint. Suppose You created an endpoint /book.</li>
+                <li class="list-group-item">Copy the url of your endpoint from <a href="/dashboard">dashboard</a>. The url will be https://mockpostie.herokuapp.com/api/:loggedInUserId/book/</li>
+                <li class="list-group-item">Keep a BACKEND_BASE_URL variable in your .env file where BACKEND_BASE_URL=https://mockpostie.herokuapp.com/api/:loggedInUserId</li>
+                <li class="list-group-item">Now when you will hit /book from your app. Your app will hit the mockpostie API and will get the response.</li>
+                <li class="list-group-item">When your actual backend API's are ready, just replace the BACKEND_BASE_URL in your .env file with your original backend server base url.</li>
+              </ul>
+              </p>
+            </div>
+        </div>
       </Container>
     </div>
   );
