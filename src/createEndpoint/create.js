@@ -63,7 +63,7 @@ const Create = () => {
       .catch((error) => {
         console.error(error);
         setLoading(false);
-        toast.error('Internal Server Error');
+        toast.error(error.message);
       });
   };
 
